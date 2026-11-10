@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案 | 新設法人 企業情報・営業リスト自動収集システム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0A1628;
+    --navy-mid:#122A4D;
+    --navy-soft:#1B3A68;
+    --teal:#00D9C0;
+    --gold:#F2B84B;
+    --ice:#EDF3FA;
+    --paper:#F7F5EF;
+    --ink:#132036;
+    --text-soft:#9FB1CC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.8;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk','Noto Sans JP',sans-serif;
+    font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(0,217,192,0.18), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(242,184,75,0.14), transparent 50%),
+      linear-gradient(160deg, var(--navy-deep) 0%, var(--navy-mid) 60%, var(--navy-deep) 100%);
+    color:#fff;
+    padding:120px 0 100px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(circle at 50% 30%, black, transparent 75%);
+    pointer-events:none;
+  }
+  .node-field{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+  .node{
+    position:absolute;
+    width:6px;height:6px;
+    background:var(--teal);
+    border-radius:50%;
+    box-shadow:0 0 12px 2px rgba(0,217,192,0.8);
+    animation:pulse 3.4s ease-in-out infinite;
+  }
+  .node.gold{background:var(--gold);box-shadow:0 0 12px 2px rgba(242,184,75,0.8);}
+  @keyframes pulse{
+    0%,100%{opacity:0.25;transform:scale(0.8);}
+    50%{opacity:1;transform:scale(1.3);}
+  }
+  .tag-line{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.18em;
+    color:var(--teal);
+    border:1px solid rgba(0,217,192,0.4);
+    padding:7px 16px;
+    border-radius:30px;
+    background:rgba(0,217,192,0.08);
+    margin-bottom:34px;
+  }
+  .tag-line::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--teal);
+    animation:blink 1.6s infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  .hero h1{
+    position:relative;
+    font-size:clamp(32px, 5.4vw, 58px);
+    line-height:1.4;
+    max-width:880px;
+    margin-bottom:28px;
+  }
+  .hero h1 span{
+    color:var(--gold);
+  }
+  .hero p.lead{
+    position:relative;
+    max-width:620px;
+    color:var(--text-soft);
+    font-size:16px;
+    margin-bottom:46px;
+  }
+  .hero .corp-strip{
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:rgba(255,255,255,0.5);
+  }
+  .corp-strip span{
+    border:1px solid rgba(255,255,255,0.18);
+    padding:6px 12px;
+    border-radius:4px;
+    background:rgba(255,255,255,0.03);
+  }
+  .from-kairos{
+    position:relative;
+    margin-top:60px;
+    padding-top:26px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    font-size:13px;
+    color:var(--text-soft);
+    letter-spacing:0.04em;
+  }
+  .from-kairos b{color:#fff;font-family:'Space Grotesk',sans-serif;}
+
+  /* ===== SECTION 2 : UNDERSTANDING ===== */
+  .understand{
+    background:var(--ice);
+    padding:110px 0;
+    position:relative;
+  }
+  .sec-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.22em;
+    color:var(--navy-soft);
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .sec-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:rgba(19,32,54,0.18);
+  }
+  .understand h2{
+    font-size:clamp(26px, 3.4vw, 36px);
+    max-width:760px;
+    margin-bottom:28px;
+    color:var(--ink);
+  }
+  .understand .intro{
+    max-width:680px;
+    color:#45506B;
+    margin-bottom:56px;
+    font-size:15.5px;
+  }
+  .ledger{
+    background:#fff;
+    border:1px solid rgba(19,32,54,0.12);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .ledger-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    border-bottom:1px solid rgba(19,32,54,0.1);
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--navy-soft);
+    background:#F0ECE1;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:22px 0;
+    border-right:1px solid rgba(19,32,54,0.1);
+  }
+  .ledger-body{
+    padding:20px 24px;
+  }
+  .ledger-body h4{
+    font-size:16px;
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+  .ledger-body p{
+    font-size:14px;
+    color:#596581;
+  }
+
+  /* ===== SECTION 3 : VALUE ===== */
+  .value{
+    background:linear-gradient(180deg, var(--navy-deep), var(--navy-mid));
+    color:#fff;
+    padding:120px 0;
+    position:relative;
+  }
+  .value .sec-label{color:var(--teal);}
+  .value .sec-label::after{background:rgba(255,255,255,0.14);}
+  .value h2{
+    font-size:clamp(26px,3.4vw,36px);
+    max-width:700px;
+    margin-bottom:50px;
+  }
+  .value h2 em{
+    font-style:normal;
+    color:var(--teal);
+  }
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:30px 24px;
+    position:relative;
+    transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(0,217,192,0.5);
+  }
+  .card .idx{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:0.12em;
+    margin-bottom:16px;
+    display:block;
+  }
+  .card h3{
+    font-size:18px;
+    margin-bottom:12px;
+    line-height:1.5;
+  }
+  .card p{
+    font-size:13.5px;
+    color:var(--text-soft);
+  }
+
+  /* ===== SECTION 4 : SCHEDULE ===== */
+  .schedule{
+    background:var(--paper);
+    padding:120px 0;
+  }
+  .schedule h2{
+    font-size:clamp(26px,3.4vw,36px);
+    max-width:700px;
+    margin-bottom:18px;
+  }
+  .schedule .intro{
+    max-width:640px;
+    color:#45506B;
+    margin-bottom:60px;
+    font-size:15.5px;
+  }
+  .timeline{
+    position:relative;
+    padding-left:30px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:7px;top:6px;bottom:6px;
+    width:2px;
+    background:linear-gradient(180deg, var(--teal), var(--gold));
+  }
+  .phase{
+    position:relative;
+    padding-bottom:48px;
+  }
+  .phase:last-child{padding-bottom:0;}
+  .phase::before{
+    content:"";
+    position:absolute;
+    left:-30px;
+    top:4px;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--paper);
+    border:3px solid var(--navy-soft);
+  }
+  .phase .ph-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    color:var(--navy-soft);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .phase h3{
+    font-size:19px;
+    margin-bottom:8px;
+    color:var(--ink);
+  }
+  .phase p{
+    font-size:14px;
+    color:#596581;
+    max-width:600px;
+  }
+
+  /* ===== CLOSING ===== */
+  .closing{
+    position:relative;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(242,184,75,0.16), transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(0,217,192,0.14), transparent 50%),
+      var(--navy-deep);
+    color:#fff;
+    padding:130px 0 90px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .closing h2{
+    font-size:clamp(28px,4.4vw,44px);
+    max-width:760px;
+    margin:0 auto 24px;
+  }
+  .closing h2 span{color:var(--teal);}
+  .closing p{
+    max-width:560px;
+    margin:0 auto 44px;
+    color:var(--text-soft);
+    font-size:15.5px;
+  }
+  .cta-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(90deg, var(--teal), #00b6a0);
+    color:var(--navy-deep);
+    font-weight:700;
+    font-family:'Space Grotesk',sans-serif;
+    padding:18px 38px;
+    border-radius:50px;
+    font-size:15px;
+    letter-spacing:0.02em;
+    box-shadow:0 10px 30px rgba(0,217,192,0.25);
+    transition:transform 0.2s ease;
+  }
+  .cta-btn:hover{transform:translateY(-3px);}
+  .closing .sub-note{
+    margin-top:40px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:rgba(255,255,255,0.35);
+    letter-spacing:0.08em;
+  }
+  footer{
+    background:var(--navy-deep);
+    color:rgba(255,255,255,0.3);
+    text-align:center;
+    padding:24px 0 36px;
+    font-size:12px;
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.06em;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+
+  @media (max-width:768px){
+    .hero{padding:90px 0 70px;}
+    .hero .corp-strip{gap:8px;}
+    .ledger-row{grid-template-columns:52px 1fr;}
+    .understand, .value, .schedule{padding:80px 0;}
+    .closing{padding:90px 0 60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="node-field">
+    <div class="node" style="top:18%;left:12%;animation-delay:0s;"></div>
+    <div class="node gold" style="top:30%;left:78%;animation-delay:0.6s;"></div>
+    <div class="node" style="top:62%;left:88%;animation-delay:1.1s;"></div>
+    <div class="node" style="top:75%;left:22%;animation-delay:1.6s;"></div>
+    <div class="node gold" style="top:50%;left:50%;animation-delay:2s;"></div>
+    <div class="node" style="top:10%;left:55%;animation-delay:0.3s;"></div>
+  </div>
+  <div class="wrap">
+    <div class="tag-line">PROPOSAL FROM KAIROS — hmllp_柳澤研 様</div>
+    <h1>全国で、毎日生まれる法人を。<br>見つけ、整え、<span>営業リストに変える。</span></h1>
+    <p class="lead">
+      国税庁法人番号公表サイトという「公的な出生届」から、企業のWebサイト・連絡先という「生きた情報」まで。
+      散らばったデータを自動で辿り、使える形に整える仕組みを、Kairosがゼロから設計します。
+    </p>
+    <div class="corp-strip">
+      <span class="mono">法人番号 連携</span>
+      <span class="mono">公式サイト自動特定</span>
+      <span class="mono">生成AIで業種分類</span>
+      <span class="mono">重複排除 / 更新管理</span>
+      <span class="mono">Sheets・CSV出力</span>
+    </div>
+    <div class="from-kairos">
+      <b>Kairos</b> は、Web制作とシステム開発を横断するチームです。本提案は、本募集内容を拝見した上で
+      構成した、独自の実現プランです。
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2 : UNDERSTANDING ===== -->
+<section class="understand">
+  <div class="wrap">
+    <div class="sec-label">01 / 案件理解</div>
+    <h2>「公開されている情報」と「使える情報」の間には、<br>想像より大きな距離がある。</h2>
+    <p class="intro">
+      新設法人の情報は、国税庁のサイトに日々公開されています。けれどそこにあるのは法人番号や所在地といった「骨格」だけ。
+      営業に使えるリストにするには、Webサイトを探し、業種を見極め、連絡先を確かめる——人手に頼れば、件数が増えるほど破綻する作業です。
+      御社が目指す「横展開できるシステム」には、最初の設計思想がすべてを決めます。
+    </p>
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="ledger-num mono">01</div>
+        <div class="ledger-body">
+          <h4>公開データは「ある」が、構造化されていない</h4>
+          <p>法人番号公表サイトや各種公開情報は更新頻度・形式がバラバラ。継続収集には、差分検知と正規化の設計が不可欠です。</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num mono">02</div>
+        <div class="ledger-body">
+          <h4>Webサイト特定・業種判定は、人の経験が必要だった領域</h4>
+          <p>社名検索だけでは誤特定が頻発。生成AIによる候補の絞り込みと検証ロジックの両輪が必要です。</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num mono">03</div>
+        <div class="ledger-body">
+          <h4>「全部を一度に」は、実は最もコストが高い</h4>
+          <p>最小構成で早く動かし、精度と項目を段階的に拡張する方が、結果的に運用コストも抑えられます。</p>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-num mono">04</div>
+        <div class="ledger-body">
+          <h4>「自社運用」で終わらせない設計が、将来の資産になる</h4>
+          <p>複数企業・クライアントへの横展開を見据えるなら、収集対象・出力先を差し替え可能な構造にしておく必要があります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3 : VALUE ===== -->
+<section class="value">
+  <div class="wrap">
+    <div class="sec-label">02 / Kairos の提供価値</div>
+    <h2>自動化を「作って終わり」にしない。<br><em>運用できる形</em>まで、Kairosが設計します。</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="idx mono">VALUE — 01</span>
+        <h3>実用最小構成（MVP）からの段階構築</h3>
+        <p>法人番号データ取得 → 基本情報整理 → スプレッドシート出力という核をまず稼働させ、そこから機能を積み上げます。</p>
+      </div>
+      <div class="card">
+        <span class="idx mono">VALUE — 02</span>
+        <h3>公開データ × 生成AIのハイブリッド収集</h3>
+        <p>国税庁API等の構造化データと、ChatGPT／Claude／Geminiによる非構造情報（公式サイト・業種・問い合わせ先）の補完を組み合わせます。</p>
+      </div>
+      <div class="card">
+        <span class="idx mono">VALUE — 03</span>
+        <h3>重複排除・更新管理のデータ基盤</h3>
+        <p>法人番号を主キーとした正規化、取得履歴・更新日・エラーログの管理まで含めた、崩れない運用基盤を構築します。</p>
+      </div>
+      <div class="card">
+        <span class="idx mono">VALUE — 04</span>
+        <h3>運用コストを抑えた技術選定</h3>
+        <p>Python / GAS / n8n / Make を適材適所で組み合わせ、API従量費・保守工数を抑えながら拡張しやすい構成にします。</p>
+      </div>
+      <div class="card">
+        <span class="idx mono">VALUE — 05</span>
+        <h3>横展開を前提にした拡張設計</h3>
+        <p>収集対象・出力先・抽出条件を差し替え可能なモジュール構造にし、将来の複数クライアント対応を見据えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4 : SCHEDULE ===== -->
+<section class="schedule">
+  <div class="wrap">
+    <div class="sec-label">03 / 進め方</div>
+    <h2>まずは小さく動かし、確かめながら育てる。</h2>
+    <p class="intro">
+      すべての機能を初期段階で実装する必要はない、という御社の方針に合わせ、Kairosは4フェーズでの段階的な構築をご提案します。
+      各フェーズの終わりに動くものを確認いただきながら、次の優先順位を一緒に決めていきます。
+    </p>
+    <div class="timeline">
+      <div class="phase">
+        <div class="ph-tag">Phase 0 ・ 約1週間</div>
+        <h3>要件整理・構成設計</h3>
+        <p>取得項目、情報源、出力形式、運用体制のすり合わせ。推奨システム構成とツール選定をご提示します。</p>
+      </div>
+      <div class="phase">
+        <div class="ph-tag">Phase 1 ・ 約2〜3週間</div>
+        <h3>MVP構築：収集の核をつくる</h3>
+        <p>法人番号公表データの定期取得、会社名・所在地・設立時期等の整理、Googleスプレッドシートへの自動出力を実装します。</p>
+      </div>
+      <div class="phase">
+        <div class="ph-tag">Phase 2 ・ 約2〜3週間</div>
+        <h3>AI補完：情報を「使える」形に</h3>
+        <p>公式Webサイトの自動特定、業種・事業内容の判定、問い合わせ先・フォームURLの取得を生成AIで補完します。</p>
+      </div>
+      <div class="phase">
+        <div class="ph-tag">Phase 3 ・ 継続運用</div>
+        <h3>精度改善・重複排除の高度化</h3>
+        <p>取得履歴・エラー管理の仕組みを整え、定期実行の安定化と精度のチューニングを継続的に行います。</p>
+      </div>
+      <div class="phase">
+        <div class="ph-tag">Phase 4 ・ ご相談の上で</div>
+        <h3>横展開：複数対象・複数クライアントへ</h3>
+        <p>収集対象の拡張、他社向けシステムとしての展開など、継続的なご相談の中で次の一手を設計します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section class="closing">
+  <div class="wrap">
+    <div class="sec-label" style="justify-content:center;">04 / 次の一歩</div>
+    <h2>この仕組みは、<span>最初の1社分</span>では終わりません。</h2>
+    <p>
+      推奨システム構成、概算費用・納期、月額運用費の目安について、
+      まずは30分ほどお打ち合わせのお時間をいただければ、具体的な形でご提案いたします。
+    </p>
+    <a href="#" class="cta-btn">Kairos に相談してみる →</a>
+    <div class="sub-note">KAIROS — WEB / SYSTEM DEVELOPMENT TEAM</div>
+  </div>
+</section>
+
+<footer>
+  © Kairos — Proposal prepared for hmllp_柳澤研
+</footer>
+
+</body>
+</html>
